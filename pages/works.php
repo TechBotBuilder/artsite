@@ -25,9 +25,9 @@ $images = [];
 require_once "../templates/common.php";
 
 $title = "Portfolio of Works";
-template\header("Tonya Ramsey - ".$title, $title);
+template\header("Tonya Ramsey - ".$title);
 
-template\start_content();
+template\start_content($title);
 
 require_once "../templates/image_grid.php";
 template\image_grid($images);
