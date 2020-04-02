@@ -13,11 +13,11 @@ function image_grid($images: array, $style = 'thumbnail'){
 
 $style = strtolower($style);//lowercase for 'if' comparison
 if($style == 'thumbnail'){
-	require_once "./thumbnail.php";
+	require_once "thumbnail.php";
 	$single_img_template = '\template\thumbnail';
 	
 } elseif ($style == 'full') {
-	require_once "./full_image.php";
+	require_once "full_image.php";
 	$single_img_template = '\template\full_image';
 	
 }else{
