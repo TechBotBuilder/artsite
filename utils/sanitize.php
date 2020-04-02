@@ -19,7 +19,7 @@ use in another file:
 into an html text-y attribute
 eg putting information into an image's 'alt' attribute
 */
-function htmlattr($text){
+function html_attr($text){
 	return addslashes($text);
 }
 
@@ -27,7 +27,7 @@ function htmlattr($text){
 into an html id-like attribute
 eg putting info into a paragraphs 'class' or 'id'
 */
-function htmlid($text){
+function html_id($text){
 	//keep letters, numbers, dashes, and underscores
 	return mb_ereg_replace("(^\w\d\-_)", '', $text);
 }
