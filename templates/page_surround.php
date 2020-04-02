@@ -20,6 +20,10 @@ function header($browser_title, $seo_description=''){
 <head>
 	<title><?= $browser_title ?></title>
 	<?php if($seo_description) echo '<meta name="description" content="'.$seo_description.'">'; ?>
+	<link rel="stylesheet" href="/styles/normalize.css">
+	<link rel="stylesheet" href="/styles/71836-styles.css">
+	<link rel="stylesheet" href="/styles/layout_style.css">
+	<link rel="stylesheet" href="/styles/color_style.css">
 </head>
 <body>
 	<div class="overlay">
