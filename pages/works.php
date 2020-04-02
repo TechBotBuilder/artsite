@@ -36,5 +36,6 @@ require_once "../templates/pagination.php";
 template\pagination($num_pages, $this_page);
 
 template\end_content();
+templates\footer();
 
 ?>
