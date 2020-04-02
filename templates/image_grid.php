@@ -28,7 +28,7 @@ if($style == 'thumbnail'){
 # we know which template to use for each image, display the grid!
 echo '<div class="grid">';
 foreach ($images as $id => $data) {
-	$single_img_template($id, $data['title'], ...);
+	//TODO $single_img_template($id, $data['title'], ...);
 }
 echo '</div>';
 

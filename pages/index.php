@@ -22,8 +22,8 @@ template\header("Tonya Ramsey Fine Art");
 
 //do a big image instead of a page title.
 $main_image = '';//get newest/static image. perhaps settings between two options in Config DB.
-require_once "../templates/big_image.php";
-template\big_image($main_image);
+require_once "../templates/hero_image.php";
+template\hero_image($main_image);
 
 
 template\start_content('');//in-page title is empty so we don't display a title in this home page (we displayed a big image instead).
