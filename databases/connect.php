@@ -10,8 +10,10 @@ function connect(){
 	//static $conn = null;
 	//if($conn==null){
     try{
-		$conn = new \PDO('mysql:host=' . $opts['host'] . ';dbname=' . $opts['database'],
+		$conn = new \PDO('mysql:host=' . $opts['host'],
 		    $opts['user'], $opts['password']);
+		$conn->prepare('use ' . $opts['database'] . ';' );
+		$conn->execute();
     }catch($e){
     	echo 'error' . $e->getMessage();
     }
