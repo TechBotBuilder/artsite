@@ -6,5 +6,9 @@ $opts = parse_ini_file('db.ini');
 
 function connect(){
 	static $conn = null;
-	if(null($conn) || $conn->
+	if($conn==null){
+		$conn = new \PDO('mysql:host='.$opts['host'].';dbname='.$opts['database'],
+		    $opts['user'], $opts['password']);
+	}
+	return $conn;
 }

@@ -9,7 +9,6 @@ require_once "connect.php";
 function query($sql, $data = array()){
     $conn = connect();
     $conn->prepare($sql);
-    $conn->bind($data);
-    $conn->execute();
+    $conn->execute($data);
     return $conn->fetchAll(\PDO::FETCH_ASSOC);
 }
