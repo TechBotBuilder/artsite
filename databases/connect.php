@@ -17,7 +17,7 @@ error_reporting(E_ALL);
 		$conn = new \PDO('mysql:host=' . $opts['host'],
 		    $opts['user'], $opts['password']);
 		$conn->prepare('use ' . $opts['database'] . ';' );
-    }catch($e){
+    }catch(PDOException $e){
     	echo 'error' . $e->getMessage();
     }
 	//}
