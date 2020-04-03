@@ -5,7 +5,7 @@ namespace template;
 function nav_links($mobile=false){
 echo '<ul ';
 if($mobile) echo ' class="sf-menu sf-js-enabled" style="touch-action: pan-y;"> ';
-else echo '>';
+else echo ' style="display: none;">';
 echo '
 	<li class="navlink">
 		<a href="https://www.tonyaramseyart.com">Home</a>
