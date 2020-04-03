@@ -6,8 +6,10 @@
 //database/query  look up MySQL select a range of primary keys
 //
 namespace database;
+
 require_once "query.php";
 
-$get_resultsSQL = "SELECT file FROM images LIMIT 0, 20;";
+$get_resultsSQL = "SELECT * FROM images LIMIT 0, 20;";
 $results = query($get_resultsSQL);
+
 var_dump($results);
