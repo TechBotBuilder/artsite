@@ -39,4 +39,7 @@ template\pagination($num_pages, $this_page);
 template\end_content();
 template\footer();
 
+require_once "../databases/list_works.php";
+
+
 ?>
