@@ -16,11 +16,11 @@ error_reporting(E_ALL);
 	//static $conn = null;
 	//if($conn==null){
     try{
-		$conn = new \PDO('mysql:host=' . $opts['host'],
+		$conn = new \PDO('mysql:host=' . $opts['host'] . ';dbname=' . $opts['database'],
 		    $opts['user'], $opts['password']);
-		$conn->prepare('use ' . $opts['database'] . ';' );
     }catch(PDOException $e){
     	echo 'error' . $e->getMessage();
+        die('failed to open connection to database');
     }
 	//}
 	echo "returning a successful connection";
