@@ -9,8 +9,13 @@ function connect(){
 	echo "connect called";
 	//static $conn = null;
 	//if($conn==null){
-		$conn = new \PDO('mysql:host='.$opts['host'].';dbname='.$opts['database'],
+    try{
+		$conn = new \PDO('mysql:host=' . $opts['host'] . ';dbname=' . $opts['database'],
 		    $opts['user'], $opts['password']);
+    }catch($e){
+    	echo 'error' . $e->getMessage();
+    }
 	//}
+	echo "returning a successful connection";
 	return $conn;
 }
