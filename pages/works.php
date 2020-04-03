@@ -30,6 +30,8 @@ template\header("Tonya Ramsey - ".$title);
 
 template\start_content($title);
 
+require_once "../databases/list_works.php";
+
 require_once "../templates/image_grid.php";
 template\image_grid($images);
 
@@ -39,7 +41,7 @@ template\pagination($num_pages, $this_page);
 template\end_content();
 template\footer();
 
-require_once "../databases/list_works.php";
+
 
 
 ?>
