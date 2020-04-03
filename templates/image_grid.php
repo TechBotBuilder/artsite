@@ -9,12 +9,12 @@ namespace template;
  	the thumbnail/full image template.
  @param $style: 'thumbnail' or 'full'
 */
-function image_grid($images: array, $style = 'thumbnail'){
+function image_grid(array $images, $style = 'thumbnail'){
 
 $style = strtolower($style);//lowercase for 'if' comparison
 if($style == 'thumbnail'){
-	require_once "thumbnail.php";
-	$single_img_template = '\template\thumbnail';
+	require_once "tile.php";
+	$single_img_template = '\template\tile';
 	
 } elseif ($style == 'full') {
 	require_once "full_image.php";

@@ -19,6 +19,7 @@ if(isset($_GET['page'])){
 # get the images for this page
 //TODO database call
 $images = [];
+$num_pages = 0;//TODO populate based on DB call results.
 
 
 # layout on the page
@@ -36,6 +37,6 @@ require_once "../templates/pagination.php";
 template\pagination($num_pages, $this_page);
 
 template\end_content();
-templates\footer();
+template\footer();
 
 ?>
