@@ -9,7 +9,7 @@ namespace database;
 echo "list_works.php";
 require_once "query.php";
 echo "get results";
-$get_resultsSQL = "SELECT file FROM images LIMIT 0, 20;";
+$get_resultsSQL = "SELECT * FROM images LIMIT 0, 20;";
 echo "calling query";
 $results = query($get_resultsSQL);
 var_dump($results);
