@@ -1,0 +1,2 @@
+# CustomLog with explicit format string
+CustomLog "admin/logs/access_log" "%{%F %T}t %a %f %q \"%{Referer}i\" \"%{User-agent}i\" %>s %T"

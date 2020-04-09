@@ -6,7 +6,9 @@ Checks if current user is logged in as admin
 */
 
 function is_admin() : boolean {
-	return isset($_SESSION['user']) && $_SESSION['user']=='admin';
+	require_once "session_manager.php";
+	SecureSession::sessionStart();
+	return isset($_SESSION['admin']) && $_SESSION['admin']==true;
 }
 
 ?>

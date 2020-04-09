@@ -15,7 +15,7 @@ if(security\is_admin()){
 }else{
 	//they aren't logged in as admin. Sendem packin'!
 	
-	header('Location: /admin/login.php');//redirect them
+	header('Location: /login.php');//redirect them
 	exit();// securely exit so no data is accidentally sent
 }
 
