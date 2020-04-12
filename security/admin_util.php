@@ -8,7 +8,7 @@ class Admin {
 	private $password_h;
 	private $email;
 	
-	public __construct(){
+	public function __construct(){
 		require_once '../databases/query.php';
 		$res = \database\query("SELECT val FROM config WHERE nam='admin'")[0];
 		$dat = json_decode($res);

@@ -6,8 +6,7 @@ namespace security;
 
 class SecureSession {
 	public static function sessionStart(){
-		session_save_path('../sessions/');//TODO check if host is secure or choose a location
-		session_set_cookie_params(['domain'=>$_SERVER['SERVER_NAME']]);
+		session_save_path('../sessions');//TODO check if host is secure
 		session_start();
 		
 		if(self::validateSession())
@@ -15,10 +14,10 @@ class SecureSession {
 			if(!self::isHijacked())
 			{
 				error_log('WARN: POSSIBLE SESSION HIJACK: IP changed from '
-					.$_SESSION['IPaddress']??'(none)'.' to '.$_SERVER['REMOTE_ADDR']
+					.($_SESSION['IPaddress']??'(none)').' to '.$_SERVER['REMOTE_ADDR']
 					.', user agent from '.strip_tags($_SESSION['userAgent']??'(none)').' to '.strip_tags($_SERVER['HTTP_USER_AGENT']),
 					3 /*send to file*/,
-					'../logs/session.log'
+					'../pages/admin/logs/session.log'
 				);
 				$_SESSION = array();
 				$_SESSION['IPaddress'] = $_SERVER['REMOTE_ADDR'];
@@ -48,7 +47,7 @@ class SecureSession {
 	public static function regenerateSession()
 	{
 		//if the session is obsolete, there is already a new ID
-		if(isset($_SESSION['OBSOLETE']) || $_SESSION['OBSOLETE'])
+		if(isset($_SESSION['OBSOLETE']) && $_SESSION['OBSOLETE'])
 			return;
 		
 		//set current session to expire in 10 seconds

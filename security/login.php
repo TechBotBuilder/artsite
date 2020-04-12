@@ -12,7 +12,7 @@ function login($username, $password) : boolean {
 	SecureSession::sessionStart();
 	
 	require_once "admin_util.php";
-	$admin = new Admin();
+	$admin = new Admin;
 	
 	if($username == $admin->getUsername() && $admin->checkPassword($password))
 	{
