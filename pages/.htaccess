@@ -1,2 +1,2 @@
-# CustomLog with explicit format string
-CustomLog "admin/logs/access_log" "%{%F %T}t %a %f %q \"%{Referer}i\" \"%{User-agent}i\" \"%{Accept-Language}i\" %>s %T"
+# Custom logging
+php_value auto_append_file "./_log.php"
