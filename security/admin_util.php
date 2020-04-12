@@ -11,7 +11,8 @@ class Admin {
 	public function __construct(){
 		require_once '../databases/query.php';
 		$res = \database\query("SELECT val FROM config WHERE nam='admin'")[0]['val'];
-		$dat = json_decode($res);
+		$dat = json_decode($res, true);
+		
 		$this->username = $dat['username'];
 		$this->password_h = $dat['password_h'];
 		$this->email = $dat['email'];
