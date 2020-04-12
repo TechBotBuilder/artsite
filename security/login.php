@@ -7,7 +7,7 @@ namespace security;
 * Returns true if login succeeded,
 * 	false if login failed (incorrect username/password, some other error)
 */
-function login($username, $password) : \boolean {
+function login($username, $password) : bool {
 	require_once 'session_manager.php';
 	SecureSession::sessionStart();
 	
