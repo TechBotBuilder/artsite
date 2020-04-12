@@ -10,7 +10,7 @@ class Admin {
 	
 	public __construct(){
 		require_once '../databases/query.php';
-		$res = \database\query("SELECT val FROM config WHERE key='admin'")[0];
+		$res = \database\query("SELECT val FROM config WHERE nam='admin'")[0];
 		$dat = json_decode($res);
 		$this->$username = $dat['username'];
 		$this->$password_h = $dat['password_h'];
@@ -30,7 +30,7 @@ class Admin {
 		$dat['password_h'] = password_hash($newpass);
 		$dat['email'] = $this->$email;
 		$put = json_encode($dat);
-		\database\query("UPDATE config SET val = :put WHERE key='admin'", ['put'=>$put]);
+		\database\query("UPDATE config SET val = :put WHERE nam='admin'", ['put'=>$put]);
 	}
 	public setEmail($email)
 	{
@@ -39,7 +39,7 @@ class Admin {
 		$dat['password_h'] = $this->$password_h;
 		$dat['email'] = $email;
 		$put = json_encode($dat);
-		\database\query("UPDATE config SET val = :put WHERE key='admin'", ['put'=>$put]);
+		\database\query("UPDATE config SET val = :put WHERE nam='admin'", ['put'=>$put]);
 	}
 	
 	

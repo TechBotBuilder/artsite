@@ -14,6 +14,9 @@ use in another file:
 	$src = sanitize\filename('My file name.jpg');
 */
 
+function html($raw){
+	return \htmlentities($raw, \ENT_QUOTES | \ENT_HTML5);
+}
 
 /*
 into an html text-y attribute
@@ -29,7 +32,7 @@ eg putting info into a paragraphs 'class' or 'id'
 */
 function html_id($text){
 	//keep letters, numbers, dashes, and underscores
-	return \mb_ereg_replace("(^\w\d\-_)", '', $text);
+	return \preg_replace("(^\w\d\-_)", '', $text);
 }
 
 /*
@@ -40,8 +43,13 @@ function filename($name){
 	//replace spaces with underscores
 	$name = \preg_replace("(\s)", "_", $name);
 	//keeps letters, numbers, dashes, underscores, and dots
-	$name = \mb_ereg_replace("(^\w\d\-_.)", '', $name);
+	$name = \preg_replace("(^\w\d\-_.)", '', $name);
 	//get rid of .., ..., etc, since they can be used to do bad things
-	$name = \mb_ereg_replace("([\.]{2,})", '', $name);
+	$name = \preg_replace("([\.]{2,})", '', $name);
 	return $name;
+}
+
+function checkbox_to_bool($checkval){
+	$checkval = strtolower(trim($checkval));
+	return in_array($checkval, ['on','yes','true']);
 }

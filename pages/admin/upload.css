@@ -1,0 +1,23 @@
+/* https://www.sitepoint.com/tracking-upload-progress-with-php-and-javascript/ */
+
+#bar_blank {
+	border: solid 1px #000;
+	height: 20px;
+	width: 100%;
+	transition: visibility 400ms;
+}
+
+#bar_color {
+	background-color: rgb(0,200,200);
+	height: 20px;
+	width: 0px;
+	transition: width 600ms ease-out;
+}
+
+#bar_blank {
+	visibility: hidden;
+}
+
+#hidden_iframe {
+	display: none;
+}
