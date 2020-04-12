@@ -1,6 +1,6 @@
 <?php
 
-include_once '../../templates/common.php';
+include_once 'templates/common.php';
 
 template\header('Workbench - Tonya Ramsey Art');
 template\start_content('The Workbench');

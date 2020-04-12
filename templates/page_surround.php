@@ -4,7 +4,7 @@
 
 namespace template;
 
-require_once "../utils/sanitize.php";
+require_once "utils/sanitize.php";
 require_once "social_buttons.php";
 require_once "nav_links.php";
 

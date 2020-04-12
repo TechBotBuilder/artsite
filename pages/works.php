@@ -23,19 +23,19 @@ $num_pages = 0;//TODO populate based on DB call results.
 
 
 # layout on the page
-require_once "../templates/common.php";
+require_once "templates/common.php";
 
 $title = "Portfolio of Works";
 template\header("Tonya Ramsey - ".$title);
 
 template\start_content($title);
 
-require_once "../databases/list_works.php";
+require_once "databases/list_works.php";
 
-require_once "../templates/image_grid.php";
+require_once "templates/image_grid.php";
 template\image_grid($images);
 
-require_once "../templates/pagination.php";
+require_once "templates/pagination.php";
 template\pagination($num_pages, $this_page);
 
 template\end_content();

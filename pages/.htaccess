@@ -1,6 +1,10 @@
+# set root include path
+php_value auto_prepend_file "../includes.php"
+
 # Custom logging
 php_value auto_append_file "./_log.php"
 
+# configure sitewide cookies
 php_value session.use_strict_mode 1
 php_value session.use_cookies 1
 php_value session.cookie_secure 1

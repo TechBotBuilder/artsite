@@ -7,7 +7,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'
 	&& isset($_POST['password'])
 	){
 	//activate user session
-	require_once '../security/login.php';
+	require_once 'security/login.php';
 	$login_success = security\login(trim($_POST['username']), trim($_POST['password']));
 	
 	if($login_success){
@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'
 	}//otherwise we put a login-failed message in the page body.
 }
 
-include_once '../templates/common.php';
+include_once 'templates/common.php';
 
 template\header('Login: Tonya Ramsey Art');
 template\start_content('Log In');

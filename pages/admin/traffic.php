@@ -1,7 +1,7 @@
 <?php
 //graphic traffic
 
-include_once '../../templates/common.php';
+include_once 'templates/common.php';
 
 template\header('Traffic - Tonya Ramsey Art');
 template\start_content('Traffic to tonyaramseyart.com');

@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 		'narrative'=>trim($_POST['narrative']),
 		'tags'=>trim($_POST['tags'])
 	);
-	require_once "../../databases/query.php";
+	require_once "databases/query.php";
 	database\query($query, $values);
 	$id = database\query('SELECT LAST_INSERT_ID()', null, true)[0];
 	
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	$file_id = $id;
 	$file_name = $file_id . $file_name_title_portion;
 	
-	require_once '../../utils/filesystem.php';
+	require_once 'utils/filesystem.php';
 	
 	// the raw upload
 	$target_raw = filesystem\get_safe_dir('./full_images/').$file_name;
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	$stamp_scale = 0.7;
 	$stamp = imagecreatetruecolor(128,16);
 	//get the main color
-	require_once '../../utils/get_color.php';
+	require_once 'utils/get_color.php';
 	$rgb = explode(',', image\mainColor($bigimg));
 	$stamp_color = imagecolorallocate($stamp, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
 	//create the copyright message and resize it
@@ -135,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 
 
 
-include_once '../../templates/common.php';
+include_once 'templates/common.php';
 
 template\header('+ Work - Tonya Ramsey Art');
 template\start_content('Yay!!! New Art!!!');

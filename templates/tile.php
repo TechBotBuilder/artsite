@@ -2,8 +2,8 @@
 
 namespace template;
 
-require_once '../sourcing/images.php';
-require_once '../utils/sanitize.php';
+require_once 'sourcing/images.php';
+require_once 'utils/sanitize.php';
 
 function tile($title, $medium, $size, $alt, $sold){
 	$alt = \sanitize\htmlattr($alt);
