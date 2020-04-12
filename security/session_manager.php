@@ -11,11 +11,11 @@ class SecureSession {
 		
 		if(self::validateSession())
 		{
-			if(!self::isHijacked())
+			if(self::isHijacked())
 			{
-				error_log('WARN: POSSIBLE SESSION HIJACK: IP changed from '
+				error_log(';'.PHP_EOL.'WARN: POSSIBLE SESSION HIJACK: IP changed from '
 					.($_SESSION['IPaddress']??'(none)').' to '.$_SERVER['REMOTE_ADDR']
-					.', user agent from '.strip_tags($_SESSION['userAgent']??'(none)').' to '.strip_tags($_SERVER['HTTP_USER_AGENT']).PHP_EOL,
+					.', user agent from '.strip_tags($_SESSION['userAgent']??'(none)').' to '.strip_tags($_SERVER['HTTP_USER_AGENT']),
 					3 /*send to file*/,
 					'../pages/admin/logs/session.log'
 				);
@@ -39,9 +39,10 @@ class SecureSession {
 		if(!isset($_SESSION['IPaddress']) || !isset($_SESSION['userAgent']))
 			return false;
 		if($_SESSION['IPaddress'] != $_SERVER['REMOTE_ADDR'])
-			return false;
+			return true;
 		if($_SESSION['userAgent'] != $_SERVER['HTTP_USER_AGENT'])
-			return false;
+			return true;
+		return false;
 	}
 	
 	public static function regenerateSession()
