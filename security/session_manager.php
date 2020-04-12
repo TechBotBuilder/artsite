@@ -15,7 +15,7 @@ class SecureSession {
 			{
 				error_log('WARN: POSSIBLE SESSION HIJACK: IP changed from '
 					.($_SESSION['IPaddress']??'(none)').' to '.$_SERVER['REMOTE_ADDR']
-					.', user agent from '.strip_tags($_SESSION['userAgent']??'(none)').' to '.strip_tags($_SERVER['HTTP_USER_AGENT']),
+					.', user agent from '.strip_tags($_SESSION['userAgent']??'(none)').' to '.strip_tags($_SERVER['HTTP_USER_AGENT']).PHP_EOL,
 					3 /*send to file*/,
 					'../pages/admin/logs/session.log'
 				);
