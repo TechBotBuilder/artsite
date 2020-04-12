@@ -37,7 +37,7 @@ class SecureSession {
 	
 	protected static function isHijacked(){
 		if(!isset($_SESSION['IPaddress']) || !isset($_SESSION['userAgent']))
-			return false;
+			return true;
 		if($_SESSION['IPaddress'] != $_SERVER['REMOTE_ADDR'])
 			return true;
 		if($_SESSION['userAgent'] != $_SERVER['HTTP_USER_AGENT'])
