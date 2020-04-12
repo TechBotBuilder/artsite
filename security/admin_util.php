@@ -17,13 +17,13 @@ class Admin {
 		$this->$email = $dat['email'];
 	}
 	
-	public checkPassword($candidate){
+	public function checkPassword($candidate){
 		return password_verify($candidate, $this->$password_h);
 	}
-	public getUsername(){return $this->$username;}
-	public getEmail(){return $this->$email;}
+	public function getUsername(){return $this->$username;}
+	public function getEmail(){return $this->$email;}
 	
-	public setPassword($newpass)
+	public function setPassword($newpass)
 	{
 		$dat = array();
 		$dat['username'] = $this->$username;
@@ -32,7 +32,7 @@ class Admin {
 		$put = json_encode($dat);
 		\database\query("UPDATE config SET val = :put WHERE nam='admin'", ['put'=>$put]);
 	}
-	public setEmail($email)
+	public function setEmail($email)
 	{
 		$dat = array();
 		$dat['username'] = $this->$username;
