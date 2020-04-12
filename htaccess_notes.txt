@@ -1,9 +1,0 @@
-//formatters used in htaccess for logs
-%{%F %T}t formatted time Y-M-D H:M:S
-%a client ip address
-%f filename
-%q query string
-%{Referer}i
-%{User-agent}i
-%>s final response status
-%T processing time (seconds)
