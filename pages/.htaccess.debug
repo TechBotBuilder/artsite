@@ -1,5 +1,6 @@
 # Custom logging
 php_value auto_append_file "./_log.php"
+
 php_flag display_errors on
 php_flag html_errors on
 php_flag log_errors on
@@ -12,3 +13,13 @@ php_value docref_ext 0
 php_value error_log ./php_err.txt
 php_value error_reporting -1
 php_value log_errors_max_len 0
+
+php_value session.use_strict_mode 1
+php_value session.use_cookies 1
+php_value session.cookie_secure 1
+php_value session.use_only_cookies 1
+php_value session.cookie_httponly 1
+php_value session.entropy_length 32
+php_value session.entropy_file /dev/urandom
+php_value session.cookie_samesite "Strict"
+php_value session.upload_progress.min_freq 0

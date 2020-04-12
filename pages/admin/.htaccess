@@ -1,10 +1,1 @@
 php_value auto_prepend_file "./check_login.php"
-php_value session.use_strict_mode 1
-php_value session.use_cookies 1
-php_value session.cookie_secure 1
-php_value session.use_only_cookies 1
-php_value session.cookie_httponly 1
-php_value session.entropy_length 32
-php_value session.entropy_file /dev/urandom
-php_value session.cookie_samesite "Strict"
-php_value session.upload_progress.min_freq 0
