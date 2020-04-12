@@ -8,7 +8,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'
 	){
 	//activate user session
 	require_once '../security/login.php';
-	$login_success = security\login(trim($_POST['username']), $_POST['password']);
+	$login_success = security\login(trim($_POST['username']), trim($_POST['password']));
 	
 	if($login_success){
 		header('Location: /admin/index.php');
@@ -41,6 +41,10 @@ endif;//end bad login block
 	<label> Password
 			<input type="text" name="password">
 	</label>
+	
+	<div class='form-group form-submit'>
+		<input type='submit' value='Log In'>
+	</div>
 </form>
 
 
