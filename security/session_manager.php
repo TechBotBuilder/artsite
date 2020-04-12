@@ -6,7 +6,6 @@ namespace security;
 
 class SecureSession {
 	public static function sessionStart(){
-		session_save_path('../sessions');//TODO check if host is secure
 		session_start();
 		
 		if(self::validateSession())
