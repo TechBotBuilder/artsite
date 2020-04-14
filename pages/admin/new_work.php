@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	
 	
 	// insert into database before saving the image so we can save the image with the ID
-	$query = 'INSERT INTO images (`title`, `size`, `media`, `price`, `show_price`, `available`, `description`, `narrative`, `tags`) VALUES (:title, :size, :price, :show_price, :available, :description, :narrative, :tags)';
+	$query = 'INSERT INTO images (`title`, `size`, `media`, `price`, `show_price`, `available`, `description`, `narrative`, `tags`) VALUES (:title, :size, :media, :price, :show_price, :available, :description, :narrative, :tags)';
 	require_once "../../utils/sanitize.php";
 	$values = array(
 		'title'=>trim($_POST['title']),
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	require_once 'utils/filesystem.php';
 	
 	// the raw upload
-	$target_raw = filesystem\get_safe_dir('./full_images/').$file_name;
+	$target_raw = filesystem\safe_get_dir('./full_images/').$file_name;
 	if(file_exists($target_raw)){
 		//backup the old file
 		$backup_start = explode('.', $target_raw);
@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 			break;
 		case 'gif':
 			$image = imagecreatefromgif($target_raw);
+			break;
 		default:
 			//may break (throw an error or superbly fail) or may be fine
 			$image = imagecreatefromstring(file_get_contents($target_raw));
@@ -85,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	imageinterlace($image, true);
 	
 	// a thumbnail
-	$target_thumb = filesystem\get_safe_dir('../images/thumbs/').$file_id;
+	$target_thumb = filesystem\safe_get_dir('../images/thumbs/').$file_id;
 	//420px width, low quality jpeg
 	$thumb_width = 400;
 	$thumb_jpeg_quality = 65; //Percentage. For comparison, default is 75.
@@ -95,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	
 	// the big image to display
 	// save big image by file_name, not id, so scrapers have a tiny bit harder time.
-	$target_big = filesystem\get_safe_dir('../images/big/').$file_name;
+	$target_big = filesystem\safe_get_dir('../images/big/').$file_name;
 	//1024px max side length, high quality jpeg
 	$bigimg_jpeg_quality = 75;
 	$bigimg_new_max_size = 1024;
@@ -148,13 +149,8 @@ template\start_content('Yay!!! New Art!!!');
 <link rel="stylesheet" type="text/css" href="upload.css">
 <link rel="stylesheet" type="text/css" href="forms.css">
 
-<div id="bar_blank">
-	<div id="bar_color"></div>
-</div>
-<div id="status"></div>
-
 <form id="progressForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" target='hidden_upload_iframe'>
-	
+<fieldset>
 	<div class='form-group'>
 		
 		<label>Title
@@ -171,7 +167,7 @@ template\start_content('Yay!!! New Art!!!');
 		
 		<label class='switch'>Show price?
 			<input type='checkbox' name='show_price'>
-			<span class='slider round'></span>
+			<div class='slider round'></div>
 		</label>
 		
 		<label>Price
@@ -180,7 +176,7 @@ template\start_content('Yay!!! New Art!!!');
 		
 		<label class='switch'>Available
 			<input type='checkbox' name='available'>
-			<span class='slider round'></span>
+			<div class='slider round'></div>
 		</label>
 		
 		<label>Description <small>(your thoughts)</small>
@@ -208,8 +204,14 @@ template\start_content('Yay!!! New Art!!!');
 	</div>
 	
 	<input type="submit" value="Post this thing!">
-
+</fieldset>
 </form>
+
+<!-- progress bar -->
+<div id="upload_bar_blank">
+	<div id="upload_bar_color"></div>
+</div>
+<div id="upload_status"></div>
 
 <iframe id="hidden_upload_iframe" name="hidden_upload_iframe" src="about:blank"></iframe>
 <script type="text/javascript" src="upload.js"></script>

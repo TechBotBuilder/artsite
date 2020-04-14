@@ -2,8 +2,10 @@
 // source https://www.sitepoint.com/tracking-upload-progress-with-php-and-javascript/
 
 function toggleBarVisibility(){
-	var e = document.getElementById("bar_blank");
+	var e = document.getElementById("upload_bar_blank");
 	e.style.visibility = (e.style.visibility == 'visible') ? 'hidden' : 'visible';
+	var f = document.getElementById('progress_form_controls');
+	f.disabled = !f.disabled;
 }
 
 function createRequestObject(){
@@ -27,22 +29,23 @@ function handleResponse(http){
 	var response;
 	if(http.readyState == 4){
 		response = http.responseText;
-		document.getElementById('bar_color').style.width = response + '%';
-		document.getElementById('bar_color').style.backgroundColor = 'rgb(0,200,'+200-2*Number.parseInt(response)+')';
-		document.getElementById('status').innerHTML = response + '%';
+		document.getElementById('upload_bar_color').style.width = response + '%';
+		document.getElementById('upload_bar_color').style.backgroundColor = 'rgb(0,200,'+200-2*Number.parseInt(response)+')';
+		document.getElementById('upload_status').innerHTML = response + '%';
 		
 		if(response < 100) {
 			setTimeout('sendRequest()', 500);
 		}
 		else{
 			toggleBarVisibility();
-			document.getElementById('status').innerHTML = 'Upload complete!';
+			document.getElementById('upload_status').innerHTML = 'Upload complete!';
 		}
 	}
 }
 
 function startUpload(){
 	toggleBarVisibility();
+	document.getElementById('upload_status').innerHTML = 'Uploading...';
 	setTimeout('sendRequest()', 500);
 }
 
