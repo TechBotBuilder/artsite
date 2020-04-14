@@ -4,7 +4,7 @@ namespace image;
 // source JKirchartz https://stackoverflow.com/a/3468588
 // @param cg : color granularity, hex increments in which to round colors.
 // returns at most $numColors values like '00,30,FA'
-function colorPalette($img, $numColors, $granularity = 4, $cg = 0x33) 
+function colorPalette(&$img, $numColors, $granularity = 4, $cg = 0x33) 
 {
    $granularity = max(1, abs((int)$granularity));
    $colors = array();
@@ -34,7 +34,7 @@ function colorPalette($img, $numColors, $granularity = 4, $cg = 0x33)
    return array_slice(array_keys($colors), 0, $numColors);
 }
 
-function mainColor($imageFile, $granularity = 4, $color_granularity = 0x33)
+function mainColor(&$imageFile, $granularity = 4, $color_granularity = 0x33)
 {
    return colorPalette($imageFile, 1, $granularity, $color_granularity)[0];
 }
