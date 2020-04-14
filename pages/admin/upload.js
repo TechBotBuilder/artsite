@@ -23,7 +23,7 @@ function sendRequest(){
 	http.send(null);
 }
 
-function handleResponse(){
+function handleResponse(http){
 	var response;
 	if(http.readyState == 4){
 		response = http.responseText;

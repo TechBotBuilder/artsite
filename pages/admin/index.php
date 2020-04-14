@@ -55,8 +55,9 @@ function daysOfWeekTodayLast(){
 }
 
 function loadTrafficOverview(){
-	fetch('./traffic_data.php?what=views&when=', {credentials: 'same-origin'})
+	fetch('admin/traffic_data.php?what=views&start=last%20week', {credentials: 'same-origin'})
 		.then((response) => {
+			console.log(response);
 			return response.json();
 		})
 		.then((data) => {
@@ -105,6 +106,6 @@ $encouragement = [
 'Take deep breaths',
 'You are good',
 ];
-template\end_content(array_rand($encouragement));
-template\footer();
+template\end_content();
+template\footer(array_rand($encouragement));
 ?>
