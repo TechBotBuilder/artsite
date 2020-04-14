@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	imageinterlace($image, true);
 	
 	// a thumbnail
-	$target_thumb = filesystem\safe_get_dir('../images/thumbs/').$file_id;
+	$target_thumb = filesystem\safe_get_dir('../images/thumbs/').$file_name;
 	//420px width, low quality jpeg
 	$thumb_width = 400;
 	$thumb_jpeg_quality = 65; //Percentage. For comparison, default is 75.
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 		(imagesy($bigimg)/2) - (imagesy($sstamp)/2),
 		0, 0, imagesx($sstamp), imagesy($sstamp),
 		$stamp_alpha);
-	imagedestroy($stamp);
+	imagedestroy($sstamp);
 	// save the copyrighted big image!
 	imagejpeg($bigimg, $target_big, $bigimg_jpeg_quality);
 	imagedestroy($bigimg);
@@ -151,7 +151,7 @@ template\start_content('Yay!!! New Art!!!');
 <link rel="stylesheet" type="text/css" href="forms.css">
 
 <form id="progressForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" target='hidden_upload_iframe'>
-<fieldset>
+<fieldset id="progress_form_controls">
 	<div class='form-group'>
 		
 		<label>Title
