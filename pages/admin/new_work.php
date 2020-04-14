@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	);
 	require_once "databases/query.php";
 	database\query($query, $values);
-	$id = database\query('SELECT LAST_INSERT_ID()', null, true)[0];
+	$id = database\query('SELECT LAST_INSERT_ID() AS liid', null, true)['liid'];
 	
 	
 	
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	$bigimg_scale_factor = $bigimg_new_max_size / $biggest_side;
 	$new_w = $img_w * $bigimg_scale_factor;
 	$new_h = $img_h * $bigimg_scale_factor;
-	$bigimg = imagescale($image, $new_W, $new_h);
+	$bigimg = imagescale($image, $new_w, $new_h);
 	imagedestroy($image);
 	//Add copyright transparent splash
 	$stamp_alpha = 5; //percent (0-100), lower for more transparent copyright
@@ -123,7 +123,8 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	imagedestroy($stamp);
 	//put copyright message on the image
 	imagecopymerge($bigimg, $sstamp,
-		imagesx($bigimg) * (1-$stamp_scale)/2, (imagesy($bigimg)/2) - (imagesy($sstamp)/2),
+		imagesx($bigimg) * (1-$stamp_scale)/2,
+		(imagesy($bigimg)/2) - (imagesy($sstamp)/2),
 		0, 0, imagesx($sstamp), imagesy($sstamp),
 		$stamp_alpha);
 	imagedestroy($stamp);
