@@ -39,12 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['img']))
 	$id = database\query('SELECT LAST_INSERT_ID() AS liid', null, true)['liid'];
 	
 	
-	
-	// save various versions of the file.
-	$file_name_title_portion = sanitize\filename('.' . $_POST['title'] . '.jpg');
-	$file_id = $id;
-	$file_name = $file_id . $file_name_title_portion;
-	
+	// save various versions of the file.    
+	require_once 'sourcing/images.php';
+	$file_name = images\get_base_name($id, $_POST['title']);
+
 	require_once 'utils/filesystem.php';
 	
 	// the raw upload

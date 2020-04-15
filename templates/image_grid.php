@@ -27,8 +27,8 @@ if($style == 'thumbnail'){
 
 # we know which template to use for each image, display the grid!
 echo '<div class="grid">';
-foreach ($images as $id => $data) {
-	//TODO $single_img_template($id, $data['title'], ...);
+foreach ($images as $img) {
+	$single_img_template($img);
 }
 echo '</div>';
 

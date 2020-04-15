@@ -7,9 +7,11 @@
 //
 namespace database;
 
-require_once "query.php";
+function list_works(){
 
-$get_resultsSQL = "SELECT * FROM images LIMIT 0, 20;";
-$results = query($get_resultsSQL);
+	require_once "query.php";
+	$get_resultsSQL = "SELECT * FROM images;";
+	$results = query($get_resultsSQL);
 
-var_dump($results);
+	return ($results);
+}
