@@ -109,12 +109,14 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	$bigimg = imagescale($image, $new_w, $new_h);
 	imagedestroy($image);
 	//Add copyright transparent splash
-	$stamp_alpha = 5; //percent (0-100), lower for more transparent copyright
+	$stamp_alpha = 50; //percent (0-100), lower for more transparent copyright
 	$stamp_font = 2;
 	$stamp_scale = 0.7;
 	$stamp = imagecreatetruecolor(128,16);
+	$transparent_background = imagecolorallocatealpha($stamp, 0, 0, 0, 127);
+	imagefill($stamp, 0, 0, $transparent_background);
 	//get the main color
-	require_once 'utils/get_color.php';
+	require_once 'utils/image.php';
 	$rgb = explode(',', image\mainColor($bigimg));
 	$stamp_color = imagecolorallocate($stamp, hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
 	//create the copyright message and resize it
@@ -122,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	$sstamp = imagescale($stamp, imagesx($bigimg) * $stamp_scale);
 	imagedestroy($stamp);
 	//put copyright message on the image
-	imagecopymerge($bigimg, $sstamp,
+	image\imagecopymerge_alpha($bigimg, $sstamp,
 		imagesx($bigimg) * (1-$stamp_scale)/2,
 		(imagesy($bigimg)/2) - (imagesy($sstamp)/2),
 		0, 0, imagesx($sstamp), imagesy($sstamp),
