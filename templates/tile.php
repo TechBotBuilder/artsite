@@ -12,7 +12,7 @@ function tile($img){
 	$medim = $img['medium'];
 	$sold = !$img['available'];
 	$alt = \sanitize\html_attr($alt);
-	$tileid = 'tile-'+\sanitize\html_id($title);
+	$tileid = 'tile-'+\sanitize\html_id($id);
 	echo "
 <div class='tile' id='".$tileid." '>
 

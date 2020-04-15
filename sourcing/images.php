@@ -4,7 +4,7 @@ namespace images;
 require_once 'utils/sanitize.php';
 
 function get_base_name($id, $title){                  
-	$file_name_title_portion = sanitize\filename('.' . $title. '.jpg');
+	$file_name_title_portion = \sanitize\filename('.' . $title. '.jpg');
 	$file_name = $id . $file_name_title_portion;
 	return  $file_name;
 }
