@@ -1,6 +1,6 @@
 <?php
 
-if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['img']))
 {
 	
 	// make sure file is an image.
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] = 'POST' && !empty($_FILES['img']))
 	
 	// insert into database before saving the image so we can save the image with the ID
 	$query = 'INSERT INTO images (`title`, `size`, `media`, `price`, `show_price`, `available`, `description`, `narrative`, `tags`) VALUES (:title, :size, :media, :price, :show_price, :available, :description, :narrative, :tags)';
-	require_once "../../utils/sanitize.php";
+	require_once "utils/sanitize.php";
 	$values = array(
 		'title'=>trim($_POST['title']),
 		'size'=>trim($_POST['size']),
