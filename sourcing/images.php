@@ -14,5 +14,5 @@ function full_source($id, $title){
 }
 
 function thumb_source($id, $title){
-	return 'images/thumbs/' . get_base_name($id, $title);
- 
+	return '/images/thumbs/' . get_base_name($id, $title);
+}
