@@ -2,6 +2,6 @@
 
 namespace log;
 
-function whichLog(int $time = now()){
-	return \date('Y-F', $time).'.log'; //year-monthname.log
+function whichLog(int $time = time()){
+	return date('Y-F', $time).'.log'; //year-monthname.log
 }
