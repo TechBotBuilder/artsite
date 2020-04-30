@@ -13,7 +13,7 @@ function tile($img){
 	$size = $img['size'];
 	$sold = !$img['available'];
 	$alt = \sanitize\html_attr($alt);
-	$tileid = 'tile-'+\sanitize\html_id($id);
+	$tileid = 'tile-'.\sanitize\html_id($id);
 	echo "
 <div class='tile' id='".$tileid." '>
 
