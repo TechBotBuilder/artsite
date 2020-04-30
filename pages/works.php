@@ -33,8 +33,10 @@ template\start_content($title);
 require_once "templates/image_grid.php";
 template\image_grid($images);
 
+/*
 require_once "templates/pagination.php";
 template\pagination($num_pages, $this_page);
+*/
 
 template\end_content();
 template\footer();
