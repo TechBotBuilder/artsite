@@ -3,15 +3,15 @@
 
 header('Content-Type: application/json');
 
-$what = explode('+',trim($_GET['what']??'all'));
-$start = strtotime(trim($_GET['start']??'last year'));
+$start = strtotime(trim($_GET['start']??'last month'));
 $end = strtotime(trim($_GET['end']??'now'));
 if($start === false || $end === false) {
 	http_response_code(400);
 	echo json_encode(['error'=>'bad start/end query']);
 	exit();
 }
-echo json_encode(getTraffic($what, $start, $end));
+$bucket_size = trim($_GET['bucket']??'day');
+echo json_encode(getTraffic($start, $end, $bucket_size));
 
 
 function auto_increment(&$var){
@@ -113,21 +113,15 @@ class Traffic {
 		// actual visitors
 		//figure out if the page is a content page or a general page.
 		$pagetype = '';
-		foreach(constants\CONTENT_PAGES as $content_page){
-			if(in_array($page, $content_page)) {
-				$page = $content_page[0];
-				$pagetype = 'content';
-				break;
-			}
-		}
-		if($pagetype === ''){
-			foreach(constants\GENERAL_PAGES as $general_page){
-				if(in_array($page, $general_page)) {
-					$page = $general_page[0];
-					$pagetype = 'general';
+		foreach(array('content'=>constants\CONTENT_PAGES, 'general'=>constants\GENERAL_PAGES) as $_ptype => $_pages){
+			foreach($_pages as $_page){
+				if(in_array($page, $_page)) {
+					$page = $_page[0];
+					$pagetype = $_ptype;
 					break;
 				}
 			}
+			if($pagetype != '') break;
 		}
 		//If neither content nor general page, do not track it further.
 		if($pagetype == '')
@@ -254,25 +248,21 @@ class Traffic {
 
 
 /*
-* @param $what: fields to analyze. defaults to all.
 * @params $start, $end: Unix timestamps
 */
-function getTraffic(array $what, int $start, int $end){
+function getTraffic(int $start, int $end, string $bucket_size){
 	if($start < 0 || $end < 0) return array();
-	if(empty($what)) $what = [
-		'daily_views',
-		''
-	];
 	
-	$results = new Traffic('day');
+	$results = new Traffic($bucket_size);
 	$errors = array();
 	
+	require_once 'sourcing/logs.php';
 	$now = $start;
 	while($now <= $end){
 		
-		$log_name = whichLog($now);
-		$handle = fopen($log_name, 'r');
-		if($handle){
+		$log_name = log\whichLog($now);
+		
+		if(file_exists($log_name) && ($handle = fopen($log_name, 'r'))){
 			while(($line = fgets($handle)) !== false){
 				$result = parseLine($line);
 				if($result) $results->addRaw($line);
@@ -286,12 +276,10 @@ function getTraffic(array $what, int $start, int $end){
 		$now = strtotime('+1 month', $now);
 	}
 	
-	return $results;
+	return $results->get();
 }
 
 
-function whichLog(int $time){
-	return date('').'.log';
-}
+
 
 
