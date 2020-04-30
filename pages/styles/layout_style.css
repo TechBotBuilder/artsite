@@ -56,9 +56,9 @@ feel free to reuse and modify with attribution
 .tile:hover .tile-details{
 	opacity: 1;
 }
-.tile-details:before {
+/*.tile-details:before {
 	content: counter(item-counter);
-}
+}*/
 
 
 .tile-thumb{
@@ -86,6 +86,9 @@ feel free to reuse and modify with attribution
 }
 
 
+.tile-details p {
+	margin: 0 0.5rem;
+}
 
 .tile-title{
 	
