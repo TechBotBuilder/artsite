@@ -2,3 +2,31 @@
 Color styles for tonya ramsey's art website
 feel free to reuse/modify with attribution
 */
+body{
+	background-color: #AAA;
+}
+
+.tile {
+	border: 1px white solid;
+}
+.tile:after {
+	background-color: black;
+}
+
+.tile-sold-icon {
+	background-color: red;
+}
+
+
+.tile-title{
+	text-transform: uppercase;
+}
+.tile-media{
+	
+}
+.tile-price{
+	
+}
+.tile-sold{
+	
+}

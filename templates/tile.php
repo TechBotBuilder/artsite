@@ -9,7 +9,8 @@ function tile($img){
 	$alt = $img['description'];
 	$id = $img['file'];
 	$title = $img['title'];
-	$medim = $img['medium'];
+	$media = $img['media'];
+	$size = $img['size'];
 	$sold = !$img['available'];
 	$alt = \sanitize\html_attr($alt);
 	$tileid = 'tile-'+\sanitize\html_id($id);
@@ -18,11 +19,14 @@ function tile($img){
 
 	<img class='tile-thumb' src='".\images\thumb_source($id, $title)."' alt='".$alt."'>
 	
-	<h2 class='tile-title'>".$title."</h2>
+	<div class='tile-details'>
+		<h2 class='tile-title'>".$title."</h2>
+		<p class='tile-media'>".$media."</p>
+		<p class='tile-size'>".$size."</p>";
+		if($sold) echo "<p class='tile-sold'>Sold</p>";
+	echo "</div>";
 	
-	<p class='tile-medium'>".$medium."</p>";
-	
-	if($sold) echo "<p class='tile-sold'>Sold</p>";
+	if($sold) echo "<div class='tile-sold-icon'></div>";
 	echo "
 	
 </div>
