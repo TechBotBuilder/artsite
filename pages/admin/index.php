@@ -83,7 +83,7 @@ function daily_data_to_array(data){
 				result.push(0);
 				day_i.setDate(day_i.getDate()+1);
 			}
-			result.push([day, new Date(day_i), data[day]]);
+			result.push(data[day]);
 			day_i.setDate(day_i.getDate()+1);
 		}
 	}
