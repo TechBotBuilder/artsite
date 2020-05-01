@@ -26,7 +26,7 @@ template\start_content('Traffic to tonyaramseyart.com');
 <!-- fetch graph data -->
 <script>
 function updateGraph(since, til){
-	fetch('./traffic_data.php?')
+	fetch('traffic_data.php?')
 }
 </script>
 

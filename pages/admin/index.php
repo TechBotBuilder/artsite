@@ -26,13 +26,13 @@ each:
 <div>
 	<h3>Events</h3>
 	<li><a href="new_event.php">Add a new event</a></li>
-	<li><a href="events.php?edit">Edit existing events</a></li>
+	<li><a href="/events.php?edit">Edit existing events</a></li>
 </div>
 
 <div>
 	<h3>Blogs</h3>
 	<li><a href="new_blog.php">Make a new post</a></li>
-	<li><a href="blog.php?edit">Edit existing blogs</a></li>
+	<li><a href="/blog.php?edit">Edit existing blogs</a></li>
 </div>
 
 <div>
@@ -41,6 +41,8 @@ each:
 		<canvas id="traffic-display"></canvas>
 	</div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
 
 <script>
 window.onload = loadTrafficOverview;
@@ -54,8 +56,19 @@ function daysOfWeekTodayLast(){
 	return days;
 }
 
+function sum_out(data){
+	let result = {};
+	for(let page of Object.keys(data)){
+		for(let bucket of Object.keys(data[page])){
+			if(!result.hasOwnProperty(bucket)){result[bucket] = 0;}
+			result[bucket] += data[page][bucket];
+		}
+	}
+	return result;
+}
+
 function loadTrafficOverview(){
-	fetch('admin/traffic_data.php?what=views&start=last%20week', {credentials: 'same-origin'})
+	fetch('admin/traffic_data.php?start=last%20week&bucket=day', {credentials: 'same-origin'})
 		.then((response) => {
 			console.log(response);
 			return response.json();
@@ -63,26 +76,26 @@ function loadTrafficOverview(){
 		.then((data) => {
 			console.log(data);
 			
-			const pastweek_views = data.views;
-			var ctx = document.getElementById('traffic-display').getContext('2d');
+			var ctx = document.getElementById('traffic-display');
 			var myChart = new Chart(ctx, {
-				type: 'line',
+				type: 'bar',
 				data: {
 					labels: daysOfWeekTodayLast(),
 					datasets: [{
-						label: '# of views',
-						data: pastweek_views,
-						borderWidth: 1,
-						xAxisID: 'Date',
-						yAxisID: 'Views'
+						label: 'General Page Views',
+						data: sum_out(data['general'])
+					},
+					{
+						label: 'Content Page Views',
+						data: sum_out(data['content'])
 					}]
 				},
 				options: {
 					scales: {
+						xAxes: [{ stacked: true }],
 						yAxes: [{
-							ticks: {
-								beginAtZero: true
-							}
+							ticks: {beginAtZero: true},
+							stacked: true
 						}]
 					}
 				}
