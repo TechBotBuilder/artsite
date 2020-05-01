@@ -19,7 +19,6 @@ function auto_increment(&$var){
 	else $var = 1;
 }
 
-require_once 'constants.php';
 class Traffic {
 	
 	//buckets into which to break down all the rest of the statistics
@@ -112,6 +111,7 @@ class Traffic {
 		
 		// actual visitors
 		//figure out if the page is a content page or a general page.
+		require_once 'constants.php';
 		$pagetype = '';
 		foreach(array('content'=>constants\CONTENT_PAGES, 'general'=>constants\GENERAL_PAGES) as $_ptype => $_pages){
 			foreach($_pages as $_page){
@@ -260,13 +260,12 @@ function getTraffic(int $start, int $end, string $bucket_size){
 	$now = $start;
 	while($now <= $end){
 		
-		$log_name = log\whichLog($now);
+		$log_name = 'logs/'.log\whichLog($now);
 		
 		if(file_exists($log_name) && ($handle = fopen($log_name, 'r'))){
 			while(($line = fgets($handle)) !== false){
-				$result = parseLine($line);
-				if($result) $results->addRaw($line);
-				//TODO append line to results if is relevant.
+				$results->addRaw($line);
+				//TODO deal with condensed log files.
 			}
 			fclose($handle);
 		}else{

@@ -42,7 +42,7 @@ each:
 	</div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
 <script>
 window.onload = loadTrafficOverview;
@@ -67,8 +67,36 @@ function sum_out(data){
 	return result;
 }
 
+function daily_data_to_array(data){
+	let result = [];
+	const last_week = new Date();
+	last_week.setDate(last_week.getDate()-6);//start last week
+	
+	let day_i = new Date(last_week);
+	for(let day of Object.keys(data).sort()){
+		let ymwd = day.split(" ");
+		ymwd[1] -= 1;//php 1's, js 0's.
+		let target_date = new Date(day_i);
+			target_date.setFullYear(ymwd[0], ymwd[1], ymwd[3]);
+		if(last_week <= target_date){
+			while(day_i < target_date){
+				result.push(0);
+				day_i.setDate(day_i.getDate()+1);
+			}
+			result.push([day, new Date(day_i), data[day]]);
+			day_i.setDate(day_i.getDate()+1);
+		}
+	}
+	
+	while(result.length < 7){
+		result.push(0);
+	}
+	
+	return result;
+}
+
 function loadTrafficOverview(){
-	fetch('admin/traffic_data.php?start=last%20week&bucket=day', {credentials: 'same-origin'})
+	fetch('/admin/traffic_data.php?start=last%20week&bucket=day', {credentials: 'same-origin'})
 		.then((response) => {
 			console.log(response);
 			return response.json();
@@ -83,20 +111,17 @@ function loadTrafficOverview(){
 					labels: daysOfWeekTodayLast(),
 					datasets: [{
 						label: 'General Page Views',
-						data: sum_out(data['general'])
+						data: daily_data_to_array(sum_out(data['general']))
 					},
 					{
 						label: 'Content Page Views',
-						data: sum_out(data['content'])
+						data: daily_data_to_array(sum_out(data['content']))
 					}]
 				},
 				options: {
 					scales: {
 						xAxes: [{ stacked: true }],
-						yAxes: [{
-							ticks: {beginAtZero: true},
-							stacked: true
-						}]
+						yAxes: [{ stacked: true }]
 					}
 				}
 			})
