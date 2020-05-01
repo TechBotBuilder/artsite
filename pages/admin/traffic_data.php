@@ -251,14 +251,14 @@ class Traffic {
 * @params $start, $end: Unix timestamps
 */
 function getTraffic(int $start, int $end, string $bucket_size){
-	if($start < 0 || $end < 0) return array();
+	if($end < $start) return array();
 	
 	$results = new Traffic($bucket_size);
 	$errors = array();
 	
 	require_once 'sourcing/logs.php';
 	$now = $start;
-	while($now <= $end){
+	while($now < strtotime('+1 month',$end)){
 		
 		$log_name = 'logs/'.log\whichLog($now);
 		
