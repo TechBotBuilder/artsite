@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_FILES['img']))
 	$bigimg = imagescale($image, $new_w, $new_h);
 	imagedestroy($image);
 	//Add copyright transparent splash
-	$stamp_alpha = 50; //percent (0-100), lower for more transparent copyright
+	$stamp_alpha = 5; //percent (0-100), lower for more transparent copyright
 	$stamp_font = 2;
 	$stamp_scale = 0.7;
 	$stamp = imagecreatetruecolor(128,16);
