@@ -145,5 +145,5 @@ $encouragement = [
 'You are good',
 ];
 template\end_content();
-template\footer(array_rand($encouragement));
+template\footer($encouragement[array_rand($encouragement)]);
 ?>
